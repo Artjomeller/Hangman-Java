@@ -64,6 +64,9 @@ public class ButtonSend implements ActionListener {
             defeat();
             endGame();
         }
+        view.getGameBoard().getTxtChar().setText("");
+        view.getGameBoard().getTxtChar().requestFocusInWindow();
+
         System.out.println(model.getWord());
     }
 }
