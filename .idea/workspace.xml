@@ -9,19 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3a9a89e-df2f-41b6-935e-2b222c675b42" name="Changes" comment="Muudetud mudelit, README, Settings Database ja listud ComboboxChange.">
-      <change afterPath="$PROJECT_DIR$/src/listeners/ButtonSend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/GameTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/GameTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/RealTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/RealTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/listeners/ButtonNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/listeners/ButtonNew.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/panels/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/panels/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/panels/LeaderBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/panels/LeaderBoard.java" afterDir="false" />
-    </list>
+    <list default="true" id="c3a9a89e-df2f-41b6-935e-2b222c675b42" name="Changes" comment="Muudetud mudelit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,7 +106,7 @@
       <workItem from="1717920890548" duration="19722000" />
       <workItem from="1718174695168" duration="29417000" />
       <workItem from="1718808655122" duration="624000" />
-      <workItem from="1718903367431" duration="1923000" />
+      <workItem from="1718903367431" duration="2262000" />
     </task>
     <task id="LOCAL−00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -149,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718202225269</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Muudetud mudelit">
+      <option name="closed" value="true" />
+      <created>1718951971990</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718951971990</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +168,7 @@
     <MESSAGE value="README.md õigesse kohta" />
     <MESSAGE value="Lisatud uuemad ekraanipildid" />
     <MESSAGE value="Muudetud mudelit, README, Settings Database ja listud ComboboxChange." />
-    <option name="LAST_COMMIT_MESSAGE" value="Muudetud mudelit, README, Settings Database ja listud ComboboxChange." />
+    <MESSAGE value="Muudetud mudelit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Muudetud mudelit" />
   </component>
 </project>
