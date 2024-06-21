@@ -3,15 +3,12 @@ package views;
 import helpers.GameTimer;
 import helpers.RealTimer;
 import models.Model;
-import models.datastructures.DataScore;
 import views.panels.GameBoard;
 import views.panels.LeaderBoard;
 import views.panels.Settings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -22,27 +19,27 @@ public class View extends JFrame {
     /**
      * Klassisisene, mille väärtus saadakse VIew konstruktorist ja loodud MainApp-is
      */
-    private Model model;
+    private final Model model;
     /**
      * Vaheleht (TAB) Seaded ehk avaleht
      */
-    private Settings settings;
+    private final Settings settings;
     /**
      * Vaheleht (TAB) Mängulaud
      */
-    private GameBoard gameBoard;
+    private final GameBoard gameBoard;
     /**
      * Vaheleht (TAB) Edetabel
      */
-    private LeaderBoard leaderBoard;
+    private final LeaderBoard leaderBoard;
     /**
      * Sellele paneelile tulevad kolm eelnevalt loodud vahelehte (Settings, GameBoard ja LeaderBoard)
      */
     private JTabbedPane tabbedPane;
 
     // TODO RealTimer ka
-    private GameTimer gameTimer;
-    private RealTimer realTimer;
+    private final GameTimer gameTimer;
+    private final RealTimer realTimer;
 
     /**
      * View konstruktor. Põhiakna (JFrame) loomine ja sinna paneelide (JPanel) lisamine ja JComponendid
@@ -151,12 +148,10 @@ public class View extends JFrame {
 
     public void updateLblResult(String character) {
         if (character == null) {
-            String kriipsud = "";
-            for (int i = 0; i < model.getWord().length(); i++) {
-                kriipsud += "_";
-            }
-            model.setGuessedWord(kriipsud);
-            gameBoard.getLblResult().setText(formatGuessedWord(kriipsud));
+            StringBuilder kriipsud = new StringBuilder();
+            kriipsud.append("_".repeat(model.getWord().length()));
+            model.setGuessedWord(kriipsud.toString());
+            gameBoard.getLblResult().setText(formatGuessedWord(kriipsud.toString()));
         } else {
             model.updateGuessedWord(character);
             gameBoard.getLblResult().setText(formatGuessedWord(model.getGuessedWord()));

@@ -28,16 +28,16 @@ public class LeaderBoard extends JPanel {
     /**
      * Tabeli päis mida näeb Edetabeli vahelehel
      */
-    private String[] heading = new String[]{"Kuupäev", "Nimi", "Sõna", "Tähed", "Mänguaeg"};
+    private final String[] heading = new String[]{"Kuupäev", "Nimi", "Sõna", "Tähed", "Mänguaeg"};
     /**
      * Loome tabeli teostuse päisega kuid andmeid pole
      */
-    private DefaultTableModel dtm = new DefaultTableModel(heading, 0);
+    private final DefaultTableModel dtm = new DefaultTableModel(heading, 0);
 
     /**
      * Loome tabeli dtm baasil
      */
-    private JTable table = new JTable(dtm);
+    private final JTable table = new JTable(dtm);
 
     /**
      * Leaderboard kontruktor

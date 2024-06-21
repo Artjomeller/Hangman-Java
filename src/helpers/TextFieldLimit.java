@@ -11,11 +11,10 @@ public class TextFieldLimit extends PlainDocument {
     /**
      * Maksimaalne pikkus sisestuskastile (meil on see üks)
      */
-    private int limit;
+    private final int limit;
 
     /**
      * Konstruktor
-     * @param limit
      */
     public TextFieldLimit(int limit) {
         super(); // TextFieldLimit enda konstruktori kasutamine

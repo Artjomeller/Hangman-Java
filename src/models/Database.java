@@ -20,11 +20,11 @@ public class Database {
     /**
      * Andmebaasi ühenduse string
      */
-    private String databaseUrl;
+    private final String databaseUrl;
     /**
      * Loodud mudel
      */
-    private Model model;
+    private final Model model;
 
     /**
      * Klassi andmebaas konstruktor

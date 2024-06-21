@@ -13,19 +13,15 @@ public class Settings extends JPanel {
     /**
      * Klassisisene mudel, mille väärtus saadakse View konstruktorist ja loodud MainApp-is
      */
-    private Model model;
+    private final Model model;
     /**
      * GridBagLayout jaoks JComponent paigutamiseks "Excel" variandis
      */
-    private GridBagConstraints gbc = new GridBagConstraints();
+    private final GridBagConstraints gbc = new GridBagConstraints();
     /**
      * See silt (JLabel) näitab reaalset kuupäeva ja jooksvat kellaaega
      */
     private JLabel lblRealTime;
-    /**
-     * Sisaldab teksti "Sõna kategorgooria"
-     */
-    private JLabel lblCategory;
     /**
      * Sisaldab äraarvatava sõna kategooriat (andmebaasist). Algul "Kõik kategooriad"
      */
@@ -39,8 +35,6 @@ public class Settings extends JPanel {
      * Suunab vahelehele Edetabel
      */
     private JButton btnLeaderboard;
-
-    private JLabel lblFile;
 
     /**
      * Settings JPanel konstruktor
@@ -80,7 +74,7 @@ public class Settings extends JPanel {
         components.add(lblRealTime, gbc); // Pane objekt paneelile
 
         // Teine rida Silt ja Rippmenüü
-        lblCategory = new JLabel("Sõna kategooria");
+        JLabel lblCategory = new JLabel("Sõna kategooria");
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1; // Muuda tagasi üks komponent veergu
@@ -94,7 +88,7 @@ public class Settings extends JPanel {
         components.add(cmbCategory, gbc);
 
         // uus vahe rida
-        lblFile = new JLabel(model.getDatabaseFile(), JLabel.CENTER);
+        JLabel lblFile = new JLabel(model.getDatabaseFile(), JLabel.CENTER);
         lblFile.setForeground(Color.RED);
         lblFile.setFont(new Font("Verdana", Font.BOLD, 14));
         gbc.gridx = 0;

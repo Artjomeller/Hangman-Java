@@ -3,19 +3,13 @@ package listeners;
 import models.Database;
 import models.Model;
 import views.View;
-import views.panels.GameBoard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 public class ButtonNew implements ActionListener {
-    private Model model;
-    private View view;
+    private final Model model;
+    private final View view;
 
     public ButtonNew(Model model, View view) {
         this.model = model;

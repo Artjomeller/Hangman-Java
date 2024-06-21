@@ -12,11 +12,11 @@ public class GameBoard extends JPanel {
     /**
      * Klassisisene mudel, mille väärtus saadakse View konstruktorist ja loodud MainApp-is
      */
-    private Model model;
+    private final Model model;
     /**
      * GridBagLayout jaoks JComponent paigutamiseks "Excel" variandis
      */
-    private GridBagConstraints gbc = new GridBagConstraints();
+    private final GridBagConstraints gbc = new GridBagConstraints();
     /**
      * See silt (JLabel) näitab mängu aega kujul: mm:ss
      */

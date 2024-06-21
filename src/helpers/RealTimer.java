@@ -12,11 +12,11 @@ public class RealTimer implements ActionListener {
     /**
      * Vaade mis on loodud View-s
      */
-    private View view;
+    private final View view;
     /**
      * Reaalne aeg. NB! java.swing.timer! Vaata ka GameTimer
      */
-    private Timer timer;
+    private final Timer timer;
 
     public RealTimer(View view) {
         this.view = view;

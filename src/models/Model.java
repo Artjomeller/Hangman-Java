@@ -23,17 +23,13 @@ public class Model {
     private String word = "";
     private String guessed_word = "";
     private int mistakes = 0;
-    private ArrayList<String> wrongLetters = new ArrayList<>();
+    private final ArrayList<String> wrongLetters = new ArrayList<>();
     private String selectedCategory;// Vaikimisi valitud kategooria
     private String[] cmbCategories; // Rippmenüü sisu
     /**
-     * Kaust kus on pildid
-     */
-    private String imagesFolder = "images";
-    /**
      * Siia pannakse kõik pildid õiges järjekorras 0-12
      */
-    private List<String> imageFiles = new ArrayList<>();
+    private final List<String> imageFiles = new ArrayList<>();
     /**
      * Tabeli mugavaks kasutamiseks
      */
@@ -55,6 +51,7 @@ public class Model {
     }
 
     private void readImagesFolder() {
+        String imagesFolder = "images";
         File folder = new File(imagesFolder); // Loo kausta objekt
         File[] files = folder.listFiles(); //Loe kõik failid File objekt listi
         for(File file : Objects.requireNonNull(files)){

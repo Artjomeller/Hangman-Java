@@ -7,10 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ButtonCancel implements ActionListener {
-    private Model model;
-    private View view;
+    private final View view;
     public ButtonCancel(Model model, View view) {
-        this.model = model;
         this.view = view;
 
     }

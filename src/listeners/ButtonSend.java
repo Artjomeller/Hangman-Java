@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ButtonSend implements ActionListener {
-    private Model model;
-    private View view;
+    private final Model model;
+    private final View view;
 
     public ButtonSend(Model model, View view) {
         this.model = model;
