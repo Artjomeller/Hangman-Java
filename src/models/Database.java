@@ -62,7 +62,7 @@ public class Database {
                 String category = rs.getString("category");
                 categories.add(category); // Lisa kategooria listi kategooriad (categories)
             }
-            categories.add(0, model.getChooseCategory());
+            categories.addFirst(model.getChooseCategory());
             // System.out.println(categories);
             String[] result = categories.toArray(new String[0]); // List <String> =>String[]
             model.setCmbCategories(result); // Määra kategooriad mudelisse
