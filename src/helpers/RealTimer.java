@@ -52,4 +52,9 @@ public class RealTimer implements ActionListener {
         String strTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
         view.getSettings().getLblRealTime().setText(strTime); // Settings paneeli aja label
     }
+
+    public String getDate() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        return currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 }

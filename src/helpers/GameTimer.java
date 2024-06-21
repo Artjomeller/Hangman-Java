@@ -107,9 +107,7 @@ public class GameTimer {
      * Teeb mänguaja sekunditeks. Vajalik edetabeli jaoks
      * @return minutid korrutada 60 pluss sekundid
      */
-    public int getPlayedTimeInSeconds() {
-        return (this.minutes * 60) + seconds;
-    }
+    public int getPlayedTimeInSeconds() { return (this.minutes * 60) + seconds; }
 
     // TODO Seda meetodit ilmselt ei lähe vaja, kuid edasiarenduse eesmärgil jätame. See pole "lollikindel".
     /**

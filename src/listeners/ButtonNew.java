@@ -1,10 +1,17 @@
 package listeners;
 
+import models.Database;
 import models.Model;
 import views.View;
+import views.panels.GameBoard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class ButtonNew implements ActionListener {
     private Model model;
@@ -17,7 +24,6 @@ public class ButtonNew implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // System.out.println("Klikk"); Test
         view.hideButtons();
         if(!view.getGameTimer().isRunning()) {  //Mängu aeg ei jookse
             view.getGameTimer().setSeconds(0); // Sek nullida
@@ -30,5 +36,9 @@ public class ButtonNew implements ActionListener {
         }
         // TODO Siit jätkub õpilaste arendus
 
+        String category = model.getSelectedCategory();
+        new Database(model).setWordByCategory(category);
+        view.updateLblResult(null);
     }
+
 }

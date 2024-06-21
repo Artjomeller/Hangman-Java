@@ -141,8 +141,8 @@ public class GameBoard extends JPanel {
     private void createImagePlace(JPanel components) {
         lblImage = new JLabel();
         // TODO pildid mällu lugemata, seega võllapuud ei näe vaid värviline pildikast. Asendada temporaryImage() õigega
-        //ImageIcon imageIcon = new ImageIcon(temporaryImage()); // Sulgude osa täita õigesti ja pilt on maagiliselt näha
-        ImageIcon imageIcon = new ImageIcon(model.getImageFiles().getLast());
+        ImageIcon imageIcon = new ImageIcon(model.getImageFiles().getFirst()); // Sulgude osa täita õigesti ja pilt on maagiliselt näha
+
         lblImage.setIcon(imageIcon);
 
         gbc.gridx = 2; // Kolmas veerg
@@ -171,9 +171,20 @@ public class GameBoard extends JPanel {
      * @param pnlResult paneel kuhu näidatakse äraarvatavat sõna (T _ _ E M _ S)
      */
     private void createResultPlace(JPanel pnlResult) {
-        lblResult = new JLabel("T _ _ E M _ S");
+        lblResult = new JLabel("");
         lblResult.setFont(new Font("Courier New", Font.BOLD, 24)); // Kirjastiil ja suurus äraarvataval sõnal
         pnlResult.add(lblResult); // See paneel (pnlResult) on FlowLayout mitte GridBagLayout!
+    }
+
+    public void clearGameBoard () {
+        lblResult.setText("");
+        lblError.setText("Vigased tähed: ");
+        ImageIcon firstIcon = new ImageIcon(model.getImageFiles().getFirst());
+        lblImage.setIcon(firstIcon);
+        model.setWord("");
+        model.setGuessedWord("");
+        model.setMistakes(0);
+        model.clearLetters();
     }
 
     // Komponentide getterid

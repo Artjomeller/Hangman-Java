@@ -2,6 +2,7 @@ package views.panels;
 
 import models.Database;
 import models.Model;
+import models.datastructures.DataScore;
 import views.View;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.time.format.DateTimeFormatter;
 
 /**
  * See on edetabeli klass. See näitab andmebaasist loetud edetabelit. Seda ei saa mängimise ajal
@@ -57,6 +59,45 @@ public class LeaderBoard extends JPanel {
 
     }
 
+    public void updateScoresTable() {
+        DefaultTableModel dtm = model.getDtm();
+        while (dtm.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+
+        new Database(model).selectScores();
+
+        for (DataScore ds : model.getDataScores()) {
+            String gameTime = ds.gameTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+            String name = ds.playerName();
+            String word = ds.word();
+            String chars = ds.missedChars();
+            String humanTime = convertSecToMMSS(ds.timeSeconds());
+
+            boolean found = false;
+            for (int row = 0; row < dtm.getRowCount(); row++) {
+                if (dtm.getValueAt(row, 1).equals(name)) {
+                    dtm.setValueAt(gameTime, row, 0);
+                    dtm.setValueAt(word, row, 2);
+                    dtm.setValueAt(chars, row, 3);
+                    dtm.setValueAt(humanTime, row, 4);
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                dtm.addRow(new Object[]{gameTime, name, word, chars, humanTime});
+            }
+        }
+    }
+
+    private String convertSecToMMSS(int seconds) {
+        int min = seconds / 60;
+        int sec = seconds % 60;
+        return String.format("%02d:%02d", min, sec);
+    }
+
     private void createLeaderboard() {
         // Kerimisriba vasakul servas, kui vaja
         JScrollPane sp = new JScrollPane(table);
@@ -78,7 +119,7 @@ public class LeaderBoard extends JPanel {
         new Database(model).selectScores();
         // Kontrolli kas on andmeid ja uuenda tabelit
         if(!model.getDataScores().isEmpty()) { // Kui list pole tühi
-            view.updateScoresTable();
+            updateScoresTable();
         } else {
             JOptionPane.showMessageDialog(view, "Esmalt tuleb mängida!");
         }
