@@ -7,6 +7,8 @@ import views.View;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ButtonSend implements ActionListener {
     private final Model model;
@@ -15,10 +17,21 @@ public class ButtonSend implements ActionListener {
     public ButtonSend(Model model, View view) {
         this.model = model;
         this.view = view;
+        addKeyListenerToTextField();
     }
 
+    private void addKeyListenerToTextField() {
+        view.getGameBoard().getTxtChar().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+                }
+            }
+        });
+    }
 
-    private void victory () {
+    private void victory() {
         String currentDate = view.getRealTimer().getDate();
         String playerName = JOptionPane.showInputDialog(null, "Palun siseta teie nimi:", "Palju õnne, sa võitsid!", JOptionPane.QUESTION_MESSAGE);
         if (playerName != null && !playerName.trim().isEmpty()) {
@@ -28,12 +41,12 @@ public class ButtonSend implements ActionListener {
         }
         String playedTime = String.valueOf(view.getGameTimer().getPlayedTimeInSeconds());
         new Database(model).sendDataToTable(currentDate, playerName, model.getWord(), String.valueOf(model.getWrongLetters()), playedTime);
-
     }
 
-    private void defeat () {
+    private void defeat() {
         JOptionPane.showMessageDialog(null, "Sa kaotasid.");
     }
+
     private void endGame() {
         view.showButtons();
         view.getGameTimer().setRunning(false);
@@ -41,6 +54,7 @@ public class ButtonSend implements ActionListener {
         view.getGameBoard().clearGameBoard();
         view.getLeaderBoard().updateScoresTable();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String character = view.getGameBoard().getTxtChar().getText();
@@ -67,6 +81,5 @@ public class ButtonSend implements ActionListener {
         view.getGameBoard().getTxtChar().setText("");
         view.getGameBoard().getTxtChar().requestFocusInWindow();
 
-        // System.out.println(model.getWord());
     }
 }
