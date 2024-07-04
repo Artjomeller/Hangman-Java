@@ -67,6 +67,6 @@ public class ButtonSend implements ActionListener {
         view.getGameBoard().getTxtChar().setText("");
         view.getGameBoard().getTxtChar().requestFocusInWindow();
 
-        System.out.println(model.getWord());
+        // System.out.println(model.getWord());
     }
 }
