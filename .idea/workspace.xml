@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c3a9a89e-df2f-41b6-935e-2b222c675b42" name="Changes" comment="cln code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangman_words_ee_test.db" beforeDir="false" afterPath="$PROJECT_DIR$/hangman_words_ee_test.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/panels/LeaderBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/panels/LeaderBoard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +113,7 @@
       <workItem from="1718967400657" duration="2974000" />
       <workItem from="1720116649776" duration="70000" />
       <workItem from="1742905373918" duration="2403000" />
-      <workItem from="1743696453750" duration="4066000" />
+      <workItem from="1743696453750" duration="7333000" />
     </task>
     <task id="LOCAL−00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -209,7 +208,47 @@
       <option name="project" value="LOCAL" />
       <updated>1743701549887</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="cln code">
+      <option name="closed" value="true" />
+      <created>1743702328107</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1743702328107</updated>
+    </task>
+    <task id="LOCAL-00014" summary="cln code">
+      <option name="closed" value="true" />
+      <created>1743702390052</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1743702390052</updated>
+    </task>
+    <task id="LOCAL-00015" summary="cln code">
+      <option name="closed" value="true" />
+      <created>1743702531610</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1743702531610</updated>
+    </task>
+    <task id="LOCAL-00016" summary="cln code">
+      <option name="closed" value="true" />
+      <created>1743702620946</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1743702620946</updated>
+    </task>
+    <task id="LOCAL-00017" summary="cln code">
+      <option name="closed" value="true" />
+      <created>1743702721921</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1743702721921</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
