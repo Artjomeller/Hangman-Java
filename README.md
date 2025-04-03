@@ -5,24 +5,13 @@ Poomismäng on klassikaline sõnade äraarvamise mäng, kus mängija peab täht-
 
 ## Omadused
 - Eestikeelne kasutajaliides
-- Erinevad sõna kategooriad valimiseks
+- Kaks kategooriad sõnade valimiseks
 - Mänguaja mõõtmine ja salvestamine
 - Edetabel parimate tulemustega
 - Dünaamiliselt uuenev võllapuu illustratsioon
 - Võimalus näha valesti sisestatud tähti
 
-## Rakenduse käivitamine
-1. Veenduge, et teie arvutisse on paigaldatud Java (vähemalt versioon 11)
-2. Laadige alla rakenduse JAR-fail või kloonige see repositoorium
-3. Käivitage rakendus käsurealt:
-   ```
-   java -jar poomismang.jar
-   ```
 
-   Alternatiivina võite määrata kohandatud andmebaasi asukoha:
-   ```
-   java -jar poomismang.jar custom_database.db
-   ```
 
 ## Mängu juhend
 1. Valige kategooria rippmenüüst "Seaded" vahekaardil
