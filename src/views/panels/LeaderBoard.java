@@ -71,9 +71,7 @@ public class LeaderBoard extends JPanel {
             String gameTime = ds.gameTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
             String name = ds.playerName();
             String word = ds.word().toUpperCase();
-            // Muudame valesti sisestatud tähed suurtähtedeks ja kuvame komadega eraldatult
             String rawChars = ds.missedChars().toUpperCase();
-            // Eemaldame võimalikud kantsulud ja eraldame tähed komadega
             String chars = rawChars.replace("[", "").replace("]", "").replace(" ", ", ");
             String humanTime = convertSecToMMSS(ds.timeSeconds());
 

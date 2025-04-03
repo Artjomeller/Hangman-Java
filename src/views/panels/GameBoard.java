@@ -6,6 +6,8 @@ import models.Model;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class GameBoard extends JPanel {
@@ -105,8 +107,20 @@ public class GameBoard extends JPanel {
         };
         txtChar.setEnabled(false); // Vaikimisi lahtrisse kirjuta ei saa
         txtChar.setHorizontalAlignment(JTextField.CENTER); // Kirjuta lahtri keskele
-
+        // Piira sisestust ühe tähega ja luba vaid tähtede sisestamist
         txtChar.setDocument(new TextFieldLimit(1));
+
+        // Lisa täiendav klahvikuular, mis topeltkontrollib, et ainult tähed oleks lubatud
+        txtChar.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isLetter(c)) {
+                    e.consume(); // Ignoreeri kõiki märke, mis pole tähed
+                }
+            }
+        });
+
         gbc.gridx = 1;
         gbc.gridy = 1;
         components.add(txtChar, gbc);
@@ -131,7 +145,6 @@ public class GameBoard extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 3;
         components.add(btnCancel, gbc);
-
     }
 
     /**
@@ -140,8 +153,8 @@ public class GameBoard extends JPanel {
      */
     private void createImagePlace(JPanel components) {
         lblImage = new JLabel();
-
-        ImageIcon imageIcon = new ImageIcon(model.getImageFiles().getFirst()); // Sulgude osa täita õigesti ja pilt on maagiliselt näha
+        // Kasutame esimest pilti võllapuu piltide hulgast
+        ImageIcon imageIcon = new ImageIcon(model.getImageFiles().getFirst());
 
         lblImage.setIcon(imageIcon);
 
@@ -149,7 +162,6 @@ public class GameBoard extends JPanel {
         gbc.gridy = 0; // Esimene rida
         gbc.gridheight = 4; // Label üle 4 või 5 rea kõrge (vajab mängimist)
         components.add(lblImage, gbc);
-
     }
 
     /**
