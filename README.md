@@ -60,5 +60,5 @@ Rakendus kasutab SQLite andmebaasi, mis sisaldab kahte tabelit:
 - SQLite - andmete salvestamine
 
 ## Autorid
-Poomismängu põhiversiooni autor: [Marko Livental]
-Täiendatud versioon: [Artjom Eller]
+Poomismängu põhiversiooni autor: **Marko Livental**
+Täiendatud versioon: **Artjom Eller**
