@@ -70,8 +70,8 @@ public class LeaderBoard extends JPanel {
         for (DataScore ds : model.getDataScores()) {
             String gameTime = ds.gameTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
             String name = ds.playerName();
-            String word = ds.word();
-            String chars = ds.missedChars();
+            String word = ds.word().toUpperCase();
+            String chars = ds.missedChars().toUpperCase();
             String humanTime = convertSecToMMSS(ds.timeSeconds());
 
             boolean found = false;
