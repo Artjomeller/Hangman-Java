@@ -100,21 +100,62 @@ public class LeaderBoard extends JPanel {
     }
 
     private void createLeaderboard() {
+        // Tabeli automaatne laiuse kohandamine on vaikimisi lubatud
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
         // Kerimisriba vasakul servas, kui vaja
         JScrollPane sp = new JScrollPane(table);
         add(sp, BorderLayout.CENTER);
 
-        // Tabeli esimene veerg 100 px
-        table.getColumnModel().getColumn(0).setPreferredWidth(120);
+        // Mõõdame täpse laiuse, mida on vaja kuupäeva jaoks, kasutades vastavat fonti
+        FontMetrics fm = table.getFontMetrics(table.getFont());
+        // Näidiskuupäev, mis on tavaliselt kõige pikem võimalik
+        String sampleDate = "99.99.9999 99:99:99";
+        int dateWidth = fm.stringWidth(sampleDate) + 10; // Lisa natuke puhvrit
+
+        // Määrame eelistatud laiused vastavalt sinu soovidele
+        // Kuupäev - täpselt õige laius, et näidata kogu kuupäeva
+        table.getColumnModel().getColumn(0).setPreferredWidth(dateWidth);
+        table.getColumnModel().getColumn(0).setMinWidth(dateWidth);
+        table.getColumnModel().getColumn(0).setMaxWidth(dateWidth);
+
+        // Nimi - suurem laius, et mahutada pikemad nimed
+        table.getColumnModel().getColumn(1).setPreferredWidth(200);
+        table.getColumnModel().getColumn(1).setMinWidth(100);
+
+        // Sõna - suurem laius, et mahutada pikemad sõnad
+        table.getColumnModel().getColumn(2).setPreferredWidth(200);
+        table.getColumnModel().getColumn(2).setMinWidth(100);
+
+
+        // Tähed - suurem laius, et mahutada rohkem tähti
+        table.getColumnModel().getColumn(3).setPreferredWidth(110);
+        table.getColumnModel().getColumn(3).setMinWidth(55);
+
+        // Mänguaeg - väiksem laius, kuna formaat on lühike (mm:ss)
+        table.getColumnModel().getColumn(4).setPreferredWidth(50);
+        table.getColumnModel().getColumn(4).setMinWidth(40);
+        table.getColumnModel().getColumn(4).setMaxWidth(60);
+
+        // Lubame tabeli veergude laiuse muutmist lohistamisega
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(true);
 
         // Tabeli sisu pole muudetav
         table.setDefaultEditor(Object.class, null);
 
-        // Lahtri keskele joondamine
-        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
-        cellRenderer.setHorizontalAlignment(JLabel.CENTER);
-        table.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
-        table.getColumnModel().getColumn(4).setCellRenderer(cellRenderer);
+        // Lahtrite joondamine
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+
+        // Tekstiveergude sisu vasaku serva joondamine, et pikad sõnad oleksid paremini loetavad
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+        table.getColumnModel().getColumn(1).setCellRenderer(leftRenderer);
+        table.getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
+        table.getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
 
         // Kirjuta tabelist sisu mudelisse
         new Database(model).selectScores();
