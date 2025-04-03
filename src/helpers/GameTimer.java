@@ -108,7 +108,6 @@ public class GameTimer {
      */
     public int getPlayedTimeInSeconds() { return (this.minutes * 60) + seconds; }
 
-    // TODO Seda meetodit ilmselt ei lähe vaja, kuid edasiarenduse eesmärgil jätame. See pole "lollikindel".
     /**
      * Lisada mängu ajale aega (karistus)
      * @param seconds on täisarv (0-59)
