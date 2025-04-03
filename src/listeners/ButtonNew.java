@@ -28,11 +28,27 @@ public class ButtonNew implements ActionListener {
             view.getGameTimer().stopTime();
             view.getGameTimer().setRunning(false);
         }
-        // TODO Siit jätkub õpilaste arendus
 
+        // Võta valitud kategooria mudelilt
         String category = model.getSelectedCategory();
+
+        // Võta andmebaasist uus juhuslik sõna vastavalt kategooriale
         new Database(model).setWordByCategory(category);
+
+        // Lähtesta valede tähtede nimekiri
+        model.clearLetters();
+
+        // Nulli vigade arv
+        model.setMistakes(0);
+
+        // Määra võllapuu pildiks indeksiga 0 olev pilt
+        view.updateLblImage(0);
+
+        // Näita kasutajale allkriipsudega sõna pikkust
         view.updateLblResult(null);
+
+        // Fookus tekstikasti
+        view.getGameBoard().getTxtChar().requestFocusInWindow();
     }
 
 }

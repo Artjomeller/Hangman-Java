@@ -36,8 +36,6 @@ public class Database {
         this.selectUniqueCategories();
     }
 
-
-
     /**
      * Loob andmebaasiga ühenduse
      * @return andmebaasi ühenduse
@@ -129,7 +127,7 @@ public class Database {
 
     public void setWordByCategory(String category) {
         String sql;
-        if (category.equals("Kõik kategooriad")) {
+        if (category.equals(model.getChooseCategory())) {
             sql = "SELECT word FROM words ORDER BY RANDOM() LIMIT 1;";
         } else {
             sql = "SELECT word FROM words WHERE category = ? ORDER BY RANDOM() LIMIT 1;";
@@ -139,7 +137,7 @@ public class Database {
             Connection connection = this.dbConnection();
             String word = null;
 
-            if (category.equals("Kõik kategooriad")) {
+            if (category.equals(model.getChooseCategory())) {
                 try (Statement stmt = connection.createStatement();
                      ResultSet rs = stmt.executeQuery(sql)) {
                     if (rs.next()) {

@@ -11,7 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c3a9a89e-df2f-41b6-935e-2b222c675b42" name="Changes" comment="cln code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hangman_words_ee_test.db" beforeDir="false" afterPath="$PROJECT_DIR$/hangman_words_ee_test.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/listeners/ButtonNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/listeners/ButtonNew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/listeners/ButtonSend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/listeners/ButtonSend.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +64,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Marko/Documents/JavaApps/Hangman_2024&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Laptop/IntelliJProjects/JavaApps/Hangman-Java&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -111,6 +115,9 @@
       <workItem from="1718808655122" duration="624000" />
       <workItem from="1718903367431" duration="2437000" />
       <workItem from="1718967400657" duration="2974000" />
+      <workItem from="1720116649776" duration="70000" />
+      <workItem from="1742905373918" duration="2403000" />
+      <workItem from="1743696453750" duration="3114000" />
     </task>
     <task id="LOCAL−00001" summary="First Commit">
       <option name="closed" value="true" />

@@ -37,7 +37,6 @@ public class View extends JFrame {
      */
     private JTabbedPane tabbedPane;
 
-    // TODO RealTimer ka
     private final GameTimer gameTimer;
     private final RealTimer realTimer;
 
@@ -50,7 +49,6 @@ public class View extends JFrame {
 
         setTitle("Poomismäng 2024 õpilased"); // JFrame titelriba tekst
         setPreferredSize(new Dimension(500, 250));
-        // TODO arenduse lõpus keela akna suurendamine
         setResizable(false);
         getContentPane().setBackground(new Color(250,210,205)); // JFrame taustavärv (rõõsa)
 
@@ -77,7 +75,6 @@ public class View extends JFrame {
         tabbedPane.addTab("Mängulaud", gameBoard); // Vaheleht Mängulaud paneeliga gameBoard
         tabbedPane.addTab("Edetabel", leaderBoard); // Vaheleht Mängulaud paneeliga gameBoard
 
-        // TODO arenduse lõpus mängulaua vahelehte klikkida ei saa
         tabbedPane.setEnabledAt(1, false); // Vahelehte mängulaud ei saa klikkida
     }
 
@@ -110,6 +107,14 @@ public class View extends JFrame {
         gameBoard.getTxtChar().setText(""); // Tee sisestuskast tühjaks
     }
 
+    /**
+     * Tagastab tabbedPane komponendi
+     * @return JTabbedPane komponent
+     */
+    public JTabbedPane getTabbedPane() {
+        return tabbedPane;
+    }
+
     // GETTERID Paneelide (vahelehetede)
     public Settings getSettings() {
         return settings;
@@ -131,13 +136,22 @@ public class View extends JFrame {
         return gameTimer;
     }
 
-    public RealTimer getRealTimer() { return realTimer; }
+    public RealTimer getRealTimer() {
+        return realTimer;
+    }
 
+    /**
+     * Vormindab äraarvatava sõna kasutajale näitamiseks, lisades tähemärkide vahele tühikud
+     *
+     * @param word äraarvatav sõna (koos allkriipsudega)
+     * @return vormindatud sõna, kus tähemärkide vahel on tühikud
+     */
     public String formatGuessedWord(String word) {
         StringBuilder spacedWord = new StringBuilder();
 
         for (int i = 0; i < word.length(); i++) {
-            spacedWord.append(word.charAt(i));
+            // Kuvame tähed suurtähtedena vastavalt tagasisidele
+            spacedWord.append(Character.toUpperCase(word.charAt(i)));
             if (i < word.length() - 1) {
                 spacedWord.append(" ");
             }
@@ -146,18 +160,32 @@ public class View extends JFrame {
         return spacedWord.toString();
     }
 
+    /**
+     * Uuendab äraarvatava sõna kuvamist. Kui character on null, siis näitab ainult allkriipse.
+     * Kui character on määratud, siis uuendab guessedWord ja näitab seda.
+     *
+     * @param character täht, mida kasutaja sisestas või null uue mängu alustamisel
+     */
     public void updateLblResult(String character) {
         if (character == null) {
+            // Uue mängu alguses näita ainult allkriipse
             StringBuilder kriipsud = new StringBuilder();
             kriipsud.append("_".repeat(model.getWord().length()));
             model.setGuessedWord(kriipsud.toString());
             gameBoard.getLblResult().setText(formatGuessedWord(kriipsud.toString()));
         } else {
+            // Sõna äraarvasmise ajal, uuenda näidatavat sõna
             model.updateGuessedWord(character);
+            // Kasutame eraldi formateeritud sõna kuvamiseks
             gameBoard.getLblResult().setText(formatGuessedWord(model.getGuessedWord()));
         }
     }
 
+    /**
+     * Uuendab võllapuu pilti vastavalt vigade arvule
+     *
+     * @param mistakes vigade arv
+     */
     public void updateLblImage(int mistakes) {
         List<String> imageIcons = model.getImageFiles();
 
@@ -165,8 +193,8 @@ public class View extends JFrame {
             ImageIcon newIcon = new ImageIcon(imageIcons.get(mistakes));
             gameBoard.getLblImage().setIcon(newIcon);
         } else {
+            System.out.println("Vigade arv on väljaspool pildi indeksite vahemikku: " + mistakes);
             gameBoard.getLblImage().setIcon(new ImageIcon());
         }
     }
-
 }
