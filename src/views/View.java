@@ -73,7 +73,7 @@ public class View extends JFrame {
 
         tabbedPane.addTab("Seaded", settings); // Vaheleht Seaded paneeliga settings
         tabbedPane.addTab("Mängulaud", gameBoard); // Vaheleht Mängulaud paneeliga gameBoard
-        tabbedPane.addTab("Edetabel", leaderBoard); // Vaheleht Mängulaud paneeliga gameBoard
+        tabbedPane.addTab("Edetabel", leaderBoard); // Vaheleht Edetabel paneeliga leaderBoard
 
         tabbedPane.setEnabledAt(1, false); // Vahelehte mängulaud ei saa klikkida
     }
@@ -105,6 +105,26 @@ public class View extends JFrame {
         gameBoard.getBtnCancel().setEnabled(false); // Nupp Katkesta ei ole klikitav
         gameBoard.getTxtChar().setEnabled(false); // Sisestuskast ei ole aktiivne
         gameBoard.getTxtChar().setText(""); // Tee sisestuskast tühjaks
+    }
+
+    /**
+     * Vahetab vahekaardi edetabeli peale ja uuendab edetabeli sisu
+     */
+    public void showLeaderboard() {
+        // Uuenda edetabelit enne kuvamist
+        leaderBoard.updateScoresTable();
+
+        // Keela mängulaua vaheleht, kui see on lubatud
+        if (tabbedPane.isEnabledAt(1)) {
+            tabbedPane.setEnabledAt(1, false);
+        }
+
+        // Luba seaded ja edetabel vahekaardid
+        tabbedPane.setEnabledAt(0, true);
+        tabbedPane.setEnabledAt(2, true);
+
+        // Vaheta aktiivne vahekaart edetabeli peale
+        tabbedPane.setSelectedIndex(2);
     }
 
     /**

@@ -25,10 +25,7 @@ public class Controller {
         view.getSettings().getBtnLeaderboard().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Värskenda edetabelit enne näitamist
-                view.getLeaderBoard().updateScoresTable();
-                // Vaheta vahelehte edetabeli peale
-                view.getTabbedPane().setSelectedIndex(2);
+                view.showLeaderboard();
             }
         });
     }

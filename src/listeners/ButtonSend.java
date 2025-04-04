@@ -100,13 +100,23 @@ public class ButtonSend implements ActionListener {
             view.getGameBoard().getTxtChar().setEnabled(false);
 
             // Lubame teised vahekaardid
-            JTabbedPane tabbedPane = (JTabbedPane) view.getGameBoard().getParent();
-            tabbedPane.setEnabledAt(0, true); // Luba seaded vaheleht
-            tabbedPane.setEnabledAt(2, true); // Luba edetabel vaheleht
+            view.getTabbedPane().setEnabledAt(0, true); // Luba seaded vaheleht
+            view.getTabbedPane().setEnabledAt(2, true); // Luba edetabel vaheleht
         }
 
         // Uuenda edetabelit
         view.getLeaderBoard().updateScoresTable();
+
+        // Küsi kasutajalt, kas ta soovib näha edetabelit
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                "Kas soovid näha edetabelit?",
+                "Mäng lõppes",
+                JOptionPane.YES_NO_OPTION);
+
+        if (option == JOptionPane.YES_OPTION) {
+            view.showLeaderboard();
+        }
     }
 
     @Override
