@@ -31,49 +31,46 @@ public class ButtonSend implements ActionListener {
         });
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String character = view.getGameBoard().getTxtChar().getText().toLowerCase();
-        if (character.isEmpty()) {
-            view.getGameBoard().getLblError().setText("Palun siseta üks täht");
-        } else {
-            if (model.getWord().contains(character)) {
-                view.updateLblResult(character);
-            } else {
-                model.setMistakes(model.getMistakes() + 1);
-                model.addLetter(character);
-                view.updateLblImage(model.getMistakes());
-                // Eemaldame nurksulud valede tähtede kuvamisel
-                view.getGameBoard().getLblError().setText("Vigased tähed: " + String.join(" ", model.getWrongLetters()));
+    private void victory() {
+        String currentDate = view.getRealTimer().getDate();
+
+        // Küsime mängija nime korduva tsükliga, kuni sisestatakse sobiv nimi
+        String playerName = null;
+        boolean validName = false;
+
+        while (!validName) {
+            // Küsime kasutajalt nime
+            playerName = JOptionPane.showInputDialog(null,
+                    "Palun sisesta oma nimi:",
+                    "Palju õnne, sa võitsid!",
+                    JOptionPane.QUESTION_MESSAGE);
+
+            // Kui kasutaja vajutas Cancel või sulges akna
+            if (playerName == null) {
+                playerName = "Tundmatu";
+                validName = true;
+            }
+            // Kui nimi on tühi
+            else if (playerName.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null,
+                        "Nime väli ei tohi olla tühi. Palun sisesta nimi.",
+                        "Viga",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            // Kontrollime, kas nimi sisaldab ainult tähti ja tühikuid
+            else if (!playerName.matches("^[a-zA-ZõäöüÕÄÖÜšžŠŽ ]+$")) {
+                JOptionPane.showMessageDialog(null,
+                        "Nimi võib sisaldada ainult tähti. Palun sisesta ainult tähtedest koosnev nimi.",
+                        "Viga",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            // Nimi on korrektne
+            else {
+                validName = true;
             }
         }
 
-        // Kontrolli kas mäng on läbi
-        if (model.getWord().equals(model.getGuessedWord())) {
-            // Võit - sõna arvati ära
-            victory();
-            // Ära vii tagasi algusolekusse, et kasutaja näeks lahendust
-            endGame(false);
-        } else if (model.getMistakes() >= 11) { // Muudame > asendades >= (vastavalt tagasisidele)
-            // Kaotus - võllapuu valmis
-            defeat();
-            endGame(true);
-        } else {
-            // Mäng jätkub, tühjendame tekstikasti
-            view.getGameBoard().getTxtChar().setText("");
-            view.getGameBoard().getTxtChar().requestFocusInWindow();
-        }
-    }
-
-    private void victory() {
-        String currentDate = view.getRealTimer().getDate();
-        String playerName = JOptionPane.showInputDialog(null, "Palun siseta teie nimi:", "Palju õnne, sa võitsid!", JOptionPane.QUESTION_MESSAGE);
-        if (playerName != null && !playerName.trim().isEmpty()) {
-            System.out.println("Mänguja nimi: " + playerName);
-        } else {
-            playerName = "Tundmatu"; // Kui nimi jäeti tühjaks või tühistati
-            System.out.println("Kasutaja ei sisestanud nime, kasutame 'Tundmatu'");
-        }
+        System.out.println("Mängija nimi: " + playerName);
 
         String playedTime = String.valueOf(view.getGameTimer().getPlayedTimeInSeconds());
         // Eemaldame nurksulud valede tähtede salvestamisel
@@ -110,5 +107,39 @@ public class ButtonSend implements ActionListener {
 
         // Uuenda edetabelit
         view.getLeaderBoard().updateScoresTable();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String character = view.getGameBoard().getTxtChar().getText().toLowerCase();
+        if (character.isEmpty()) {
+            view.getGameBoard().getLblError().setText("Palun siseta üks täht");
+        } else {
+            if (model.getWord().contains(character)) {
+                view.updateLblResult(character);
+            } else {
+                model.setMistakes(model.getMistakes() + 1);
+                model.addLetter(character);
+                view.updateLblImage(model.getMistakes());
+                // Eemaldame nurksulud valede tähtede kuvamisel
+                view.getGameBoard().getLblError().setText("Vigased tähed: " + String.join(" ", model.getWrongLetters()));
+            }
+        }
+
+        // Kontrolli kas mäng on läbi
+        if (model.getWord().equals(model.getGuessedWord())) {
+            // Võit - sõna arvati ära
+            victory();
+            // Ära vii tagasi algusolekusse, et kasutaja näeks lahendust
+            endGame(false);
+        } else if (model.getMistakes() >= 11) { // Muudame > asendades >= (vastavalt tagasisidele)
+            // Kaotus - võllapuu valmis
+            defeat();
+            endGame(true);
+        } else {
+            // Mäng jätkub, tühjendame tekstikasti
+            view.getGameBoard().getTxtChar().setText("");
+            view.getGameBoard().getTxtChar().requestFocusInWindow();
+        }
     }
 }

@@ -1,4 +1,3 @@
-
 package models;
 
 import models.datastructures.DataScore;
@@ -74,29 +73,38 @@ public class Model {
     public String getGuessedWord() { return guessed_word; }
     public void setGuessedWord(String guessedWord) { this.guessed_word = guessedWord; }
 
+    /**
+     * Uuendab ära arvatud sõna, asendades allkriipsud (_) kasutaja sisestatud tähega,
+     * kui see täht esineb äraarvatavad sõnas.
+     *
+     * @param character kasutaja sisestatud täht
+     */
     public void updateGuessedWord(String character) {
-
-        List<Character> wordToList = new ArrayList<>();
-        for (char c : this.word.toCharArray()) {
-            wordToList.add(c);
+        // Kontrollime, kas character või word on null või tühjad
+        if (character == null || character.isEmpty() || word == null || word.isEmpty()) {
+            return;
         }
 
-        List<Character> guessedWordToList = new ArrayList<>();
-        for (char c : this.guessed_word.toCharArray()) {
-            guessedWordToList.add(c);
-        }
+        // Teisendame tähe väiketäheks, et tagada korrektne võrdlemine
+        char charToCheck = character.toLowerCase().charAt(0);
 
-        for (int i = 0; i < wordToList.size(); i++) {
-            if (character.charAt(0) == wordToList.get(i)) {
-                guessedWordToList.set(i, character.charAt(0));
+        // Teisendame sõnad char massiivideks töötlemise lihtsustamiseks
+        char[] wordChars = word.toCharArray();
+        char[] guessedChars = guessed_word.toCharArray();
+
+        // Läbime sõna ja asendame allkriipsud, kui täht vastab
+        boolean found = false;
+        for (int i = 0; i < wordChars.length; i++) {
+            if (wordChars[i] == charToCheck) {
+                guessedChars[i] = charToCheck;
+                found = true;
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (char c : guessedWordToList) {
-            sb.append(c);
+        // Uuendame ära arvatud sõna ainult siis, kui täht leiti
+        if (found) {
+            guessed_word = new String(guessedChars);
         }
-        this.guessed_word = sb.toString();
     }
 
     public int getMistakes () { return this.mistakes; }
@@ -117,11 +125,29 @@ public class Model {
     }
 
     /**
-     * Seadistab uue andmebaasi failinime, kui see saadi käsurealt
+     * Seadistab uue andmebaasi failinime
      * @param databaseFile uus andmebaasi failinimi
      */
     public void setDatabaseFile(String databaseFile) {
+        // Kui sama, siis pole vaja muuta
+        if (this.databaseFile.equals(databaseFile)) {
+            return;
+        }
+
+        System.out.println("Vahetame andmebaasi: " + this.databaseFile + " -> " + databaseFile);
         this.databaseFile = databaseFile;
+
+        // Tühjendame edetabeli andmed, et vältida segadust
+        if (this.dataScores != null) {
+            this.dataScores.clear();
+        }
+
+        // Tühjendame tabeli, kui see on olemas
+        if (this.dtm != null) {
+            while (this.dtm.getRowCount() > 0) {
+                this.dtm.removeRow(0);
+            }
+        }
     }
 
     /**

@@ -33,7 +33,14 @@ public class Database {
     public Database(Model model) {
         this.model = model;
         this.databaseUrl = "jdbc:sqlite:" + model.getDatabaseFile();
+
+        // Loeme kategooriad andmebaasist
         this.selectUniqueCategories();
+
+        // Kui edetabeli objekt on juba olemas, uuendame ka seda
+        if (model.getDtm() != null) {
+            this.selectScores();
+        }
     }
 
     /**
@@ -98,6 +105,15 @@ public class Database {
         }
     }
 
+    /**
+     * Salvestab mängu tulemuse andmebaasi
+     *
+     * @param playertime mängu lõppemise aeg formaadis yyyy-MM-dd HH:mm:ss
+     * @param playername mängija nimi
+     * @param guessword äraarvatav sõna
+     * @param wrongcharacters valesti sisestatud tähed (ilma nurksulgudeta)
+     * @param gametime mängu kestus sekundites
+     */
     public void sendDataToTable(String playertime, String playername, String guessword, String wrongcharacters, String gametime) {
         String sql = "INSERT INTO scores (playertime, playername, guessword, wrongcharacters, gametime) VALUES (?, ?, ?, ?, ?)";
 
@@ -107,13 +123,15 @@ public class Database {
 
             pstmt.setString(1, playertime);
             pstmt.setString(2, playername);
-            pstmt.setString(3, guessword);
-            pstmt.setString(4, wrongcharacters);
+            // Salvestame sõna suurtähtedena vastavalt tagasisidele
+            pstmt.setString(3, guessword.toUpperCase());
+            // Vigaseid tähti kuvatakse suurtähtedena
+            pstmt.setString(4, wrongcharacters.toUpperCase());
             pstmt.setString(5, gametime);
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("Data has been inserted successfully!");
+                System.out.println("Andmed on edukalt lisatud edetabelisse!");
             }
 
             pstmt.close();
@@ -125,6 +143,10 @@ public class Database {
         }
     }
 
+    /**
+     * Valib andmebaasist juhusliku sõna vastavalt kategooriale
+     * @param category kategooria, millest sõna valida
+     */
     public void setWordByCategory(String category) {
         String sql;
         if (category.equals(model.getChooseCategory())) {

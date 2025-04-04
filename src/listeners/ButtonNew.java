@@ -41,6 +41,9 @@ public class ButtonNew implements ActionListener {
         // Nulli vigade arv
         model.setMistakes(0);
 
+        // Lähtesta vigade teade
+        view.getGameBoard().getLblError().setText("Vigased tähed: ");
+
         // Määra võllapuu pildiks indeksiga 0 olev pilt
         view.updateLblImage(0);
 
