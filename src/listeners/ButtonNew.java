@@ -51,6 +51,7 @@ public class ButtonNew implements ActionListener {
         view.updateLblResult(null);
 
         // Fookus tekstikasti
+        view.getGameBoard().getTxtChar().setText("");
         view.getGameBoard().getTxtChar().requestFocusInWindow();
     }
 

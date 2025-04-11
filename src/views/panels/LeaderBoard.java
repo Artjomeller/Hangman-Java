@@ -28,7 +28,7 @@ public class LeaderBoard extends JPanel {
     /**
      * Tabeli päis mida näeb Edetabeli vahelehel
      */
-    private final String[] heading = new String[]{"Kuupäev", "Nimi", "Sõna", "Tähed", "Mänguaeg"};
+    private final String[] heading = new String[]{"Koht", "Kuupäev", "Nimi", "Sõna", "Tähed", "Aeg"};
     /**
      * Loome tabeli teostuse päisega kuid andmeid pole
      */
@@ -67,6 +67,7 @@ public class LeaderBoard extends JPanel {
 
         new Database(model).selectScores();
 
+        int koht = 1; // Järjekorranumber (koht edetabelis)
         for (DataScore ds : model.getDataScores()) {
             String gameTime = ds.gameTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
             String name = ds.playerName();
@@ -77,18 +78,19 @@ public class LeaderBoard extends JPanel {
 
             boolean found = false;
             for (int row = 0; row < dtm.getRowCount(); row++) {
-                if (dtm.getValueAt(row, 1).equals(name)) {
-                    dtm.setValueAt(gameTime, row, 0);
-                    dtm.setValueAt(word, row, 2);
-                    dtm.setValueAt(chars, row, 3);
-                    dtm.setValueAt(humanTime, row, 4);
+                if (dtm.getValueAt(row, 2).equals(name)) {
+                    dtm.setValueAt(gameTime, row, 1);
+                    dtm.setValueAt(word, row, 3);
+                    dtm.setValueAt(chars, row, 4);
+                    dtm.setValueAt(humanTime, row, 5);
                     found = true;
                     break;
                 }
             }
 
             if (!found) {
-                dtm.addRow(new Object[]{gameTime, name, word, chars, humanTime});
+                dtm.addRow(new Object[]{koht, gameTime, name, word, chars, humanTime});
+                koht++; // Suurendame järjekorranumbrit uue rea lisamisel
             }
         }
     }
@@ -114,28 +116,32 @@ public class LeaderBoard extends JPanel {
         int dateWidth = fm.stringWidth(sampleDate) + 10; // Lisa natuke puhvrit
 
         // Määrame eelistatud laiused vastavalt sinu soovidele
+        // Koht - väike laius
+        table.getColumnModel().getColumn(0).setPreferredWidth(40);
+        table.getColumnModel().getColumn(0).setMinWidth(30);
+        table.getColumnModel().getColumn(0).setMaxWidth(50);
+
         // Kuupäev - täpselt õige laius, et näidata kogu kuupäeva
-        table.getColumnModel().getColumn(0).setPreferredWidth(dateWidth);
-        table.getColumnModel().getColumn(0).setMinWidth(dateWidth);
-        table.getColumnModel().getColumn(0).setMaxWidth(dateWidth);
+        table.getColumnModel().getColumn(1).setPreferredWidth(dateWidth);
+        table.getColumnModel().getColumn(1).setMinWidth(dateWidth);
+        table.getColumnModel().getColumn(1).setMaxWidth(dateWidth);
 
         // Nimi - suurem laius, et mahutada pikemad nimed
-        table.getColumnModel().getColumn(1).setPreferredWidth(200);
-        table.getColumnModel().getColumn(1).setMinWidth(100);
-
-        // Sõna - suurem laius, et mahutada pikemad sõnad
         table.getColumnModel().getColumn(2).setPreferredWidth(200);
         table.getColumnModel().getColumn(2).setMinWidth(100);
 
+        // Sõna - suurem laius, et mahutada pikemad sõnad
+        table.getColumnModel().getColumn(3).setPreferredWidth(200);
+        table.getColumnModel().getColumn(3).setMinWidth(100);
 
         // Tähed - suurem laius, et mahutada rohkem tähti
-        table.getColumnModel().getColumn(3).setPreferredWidth(110);
-        table.getColumnModel().getColumn(3).setMinWidth(55);
+        table.getColumnModel().getColumn(4).setPreferredWidth(110);
+        table.getColumnModel().getColumn(4).setMinWidth(55);
 
-        // Mänguaeg - väiksem laius, kuna formaat on lühike (mm:ss)
-        table.getColumnModel().getColumn(4).setPreferredWidth(50);
-        table.getColumnModel().getColumn(4).setMinWidth(40);
-        table.getColumnModel().getColumn(4).setMaxWidth(60);
+        // Aeg - väiksem laius, kuna formaat on lühike (mm:ss)
+        table.getColumnModel().getColumn(5).setPreferredWidth(50);
+        table.getColumnModel().getColumn(5).setMinWidth(40);
+        table.getColumnModel().getColumn(5).setMaxWidth(60);
 
         // Lubame tabeli veergude laiuse muutmist lohistamisega
         table.getTableHeader().setReorderingAllowed(false);
@@ -147,15 +153,16 @@ public class LeaderBoard extends JPanel {
         // Lahtrite joondamine
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        table.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // Koht
+        table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Kuupäev
+        table.getColumnModel().getColumn(5).setCellRenderer(centerRenderer); // Aeg
 
-        // Tekstiveergude sisu vasaku serva joondamine, et pikad sõnad oleksid paremini loetavad
+        // Tekstiveergude sisu vasaku serva joondamine
         DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
         leftRenderer.setHorizontalAlignment(JLabel.LEFT);
-        table.getColumnModel().getColumn(1).setCellRenderer(leftRenderer);
-        table.getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
-        table.getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
+        table.getColumnModel().getColumn(2).setCellRenderer(leftRenderer); // Nimi
+        table.getColumnModel().getColumn(3).setCellRenderer(leftRenderer); // Sõna
+        table.getColumnModel().getColumn(4).setCellRenderer(leftRenderer); // Tähed
 
         // Kirjuta tabelist sisu mudelisse
         new Database(model).selectScores();
