@@ -79,7 +79,9 @@ public class Database {
     }
 
     public void selectScores() {
-        String sql = "SELECT * FROM scores ORDER BY gametime, playertime DESC, playername;";
+        // Järjestame tulemused: kõigepealt väiksem aeg (kiirem on parem),
+        // siis vähem vigu (vähem tähti on parem), siis mängija nime järgi tähestikuliselt
+        String sql = "SELECT * FROM scores ORDER BY gametime ASC, LENGTH(wrongcharacters) ASC, playername ASC;";
         List<DataScore> data = new ArrayList<>();
         try {
             Connection connection = this.dbConnection();
@@ -94,7 +96,6 @@ public class Database {
                 String guessWord = rs.getString("guessword");
                 String wrongChar = rs.getString("wrongcharacters");
                 int timeSeconds = rs.getInt("gametime");
-                // System.out.println(datetime + " | " + playerTime); // Test
                 // Lisa listi kirje
                 data.add(new DataScore(playerTime, playerName, guessWord, wrongChar, timeSeconds));
             }

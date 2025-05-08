@@ -61,10 +61,12 @@ public class LeaderBoard extends JPanel {
 
     public void updateScoresTable() {
         DefaultTableModel dtm = model.getDtm();
+        // Kustutame kõik read tabelist
         while (dtm.getRowCount() > 0) {
             dtm.removeRow(0);
         }
 
+        // Loeme andmebaasist uuendatud andmed (juba järjestatud paremusjärjekorras)
         new Database(model).selectScores();
 
         int koht = 1; // Järjekorranumber (koht edetabelis)
@@ -76,22 +78,9 @@ public class LeaderBoard extends JPanel {
             String chars = rawChars.replace("[", "").replace("]", "").replace(" ", ", ");
             String humanTime = convertSecToMMSS(ds.timeSeconds());
 
-            boolean found = false;
-            for (int row = 0; row < dtm.getRowCount(); row++) {
-                if (dtm.getValueAt(row, 2).equals(name)) {
-                    dtm.setValueAt(gameTime, row, 1);
-                    dtm.setValueAt(word, row, 3);
-                    dtm.setValueAt(chars, row, 4);
-                    dtm.setValueAt(humanTime, row, 5);
-                    found = true;
-                    break;
-                }
-            }
-
-            if (!found) {
-                dtm.addRow(new Object[]{koht, gameTime, name, word, chars, humanTime});
-                koht++; // Suurendame järjekorranumbrit uue rea lisamisel
-            }
+            // Lisame rea edetabelisse
+            dtm.addRow(new Object[]{koht, gameTime, name, word, chars, humanTime});
+            koht++; // Suurendame järjekorranumbrit
         }
     }
 
@@ -173,5 +162,4 @@ public class LeaderBoard extends JPanel {
             JOptionPane.showMessageDialog(view, "Esmalt tuleb mängida!");
         }
     }
-
 }
